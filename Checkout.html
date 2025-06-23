@@ -136,6 +136,7 @@
         flex-direction: column;
       }
     }
+    
 
 
 .mobile-header {
@@ -183,6 +184,30 @@
   display: none;
 }
 
+@media (max-width: 768px) {
+  .checkout-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  .checkout-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .order-summary {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 30px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
 
   </style>
   
