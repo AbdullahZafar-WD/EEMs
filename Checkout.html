@@ -137,17 +137,53 @@
       }
     }
 
-    .badge {
+
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #002366;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.mobile-header-left,
+.mobile-header-center,
+.mobile-header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-header-left {
+  justify-content: flex-start;
+}
+
+.mobile-header-right {
+  justify-content: flex-end;
+}
+
+.mobile-header .logo span {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+#cart-count.badge {
   background: #ffd700;
   color: #000;
   font-size: 0.5rem;
   border-radius: 50%;
   padding: 0.2rem 0.4rem;
   position: absolute;
-  top: 30px;
-  right: 21px;
+  top: -10px;
+  right: -10px;
   display: none;
 }
+
+
   </style>
   
 </head>
@@ -155,12 +191,26 @@
 
   <header class="navbar">
     <div class="mobile-header">
-      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="logo"><span>Elegant Events</span></div>
-      <a href="cart.html" style="color: white;"><i class="fa-solid fa-cart-shopping"></i><span id="cart-count" class="badge">0</span></a>
+  <div class="mobile-header-left">
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="mobile-header-center">
+    <div class="logo">
+      <span>Elegant Events</span>
     </div>
+  </div>
+
+  <div class="mobile-header-right">
+    <a href="cart.html" style="color: white; position: relative;">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count" class="badge">0</span>
+    </a>
+  </div>
+</div>
+
 
     <div class="mobile-menu" id="mobileMenu">
       <button class="close-btn" onclick="toggleMobileMenu()">&times;</button>
@@ -296,78 +346,67 @@
     <div class="checkout-container">
       <h2>Billing Details</h2>
       <form id="checkout-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label>First name *</label>
-            <input type="text" required />
-          </div>
-          <div class="form-group">
-            <label>Last name *</label>
-            <input type="text" required />
-          </div>
-        </div>
+  <div class="form-group">
+    <label>1) Complete Name *</label>
+    <input type="text" required />
+  </div>
 
-        <div class="form-group">
-          <label>Country / Region *</label>
-          <input type="text" required />
-        </div>
+  <div class="form-group">
+    <label>2) Country / Region *</label>
+    <input type="text" required />
+  </div>
 
-        <div class="form-group">
-          <label>Street address *</label>
-          <input type="text" placeholder="House number and street name" required />
-          <input type="text" placeholder="Apartment, suite, unit, etc. (optional)" style="margin-top: 10px;" />
-        </div>
+  <div class="form-group">
+    <label>3) City *</label>
+    <input type="text" required />
+  </div>
 
-        <div class="form-group">
-          <label>State / Province *</label>
-          <select required>
-            <option value="">Select an option...</option>
-            <option>Punjab</option>
-            <option>Sindh</option>
-            <option>KPK</option>
-            <option>Balochistan</option>
-            <option>Islamabad</option>
-          </select>
-        </div>
+  <div class="form-group">
+    <label>4) Complete Address *</label>
+    <textarea placeholder="Street, House #, Area" required></textarea>
+  </div>
 
-        <div class="form-group">
-          <label>Town / City *</label>
-          <input type="text" required />
-        </div>
+  <div class="form-group">
+    <label>5) Mobile No *</label>
+    <input type="tel" required />
+  </div>
 
-        <div class="form-group">
-          <label>Postcode / ZIP (optional)</label>
-          <input type="text" />
-        </div>
+  <div class="form-group">
+    <label>6) Select Payment Option *</label>
+    <select id="payment-method" required onchange="togglePaymentOptions()">
+      <option value="">-- Select --</option>
+      <option value="cod">Cash on Delivery (COD)</option>
+      <option value="advance">Advance Payment</option>
+    </select>
+  </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>Phone *</label>
-            <input type="tel" required />
-          </div>
-          <div class="form-group">
-            <label>Email address *</label>
-            <input type="email" required />
-          </div>
-        </div>
+  <!-- Advance payment section -->
+  <div id="advance-options" style="display: none;">
+    <div class="form-group">
+      <label><strong>Option 1:</strong></label>
+      <p>Easy Paisa / Jazz Cash<br />
+         <strong>0347--2402330</strong><br />
+         Account Name: <strong>Amaduddin</strong>
+      </p>
+    </div>
 
-        <div class="form-group">
-          <label>Upload Payment Proof *</label>
-          <input type="file" required />
-        </div>
+    <div class="form-group">
+      <label><strong>Option 2:</strong></label>
+      <p>Bank Alfalah<br />
+         Account No: <strong>55895000732355</strong><br />
+         Account Name: <strong>Amaduddin</strong>
+      </p>
+    </div>
 
-        <div class="form-group">
-          <label>Whatsapp Number (+92 XXX XXXXXXX) *</label>
-          <input type="text" required />
-        </div>
+    <div class="form-group">
+      <label>Attach Payment Proof *</label>
+      <input type="file" id="payment-proof" />
+    </div>
+  </div>
 
-        <div class="form-group">
-          <label>Order notes (optional)</label>
-          <textarea rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-        </div>
+  <button type="submit">Place Order</button>
+</form>
 
-        <button type="submit" style="font-size: 1.1rem; border-radius: 8px;">Place Order</button>
-      </form>
     </div>
 
     <div class="order-summary">
@@ -411,6 +450,22 @@
 
     loadSummary();
   </script>
+  <script>
+  function togglePaymentOptions() {
+    const method = document.getElementById("payment-method").value;
+    const advanceOptions = document.getElementById("advance-options");
+    const proofInput = document.getElementById("payment-proof");
+
+    if (method === "advance") {
+      advanceOptions.style.display = "block";
+      proofInput.setAttribute("required", "required");
+    } else {
+      advanceOptions.style.display = "none";
+      proofInput.removeAttribute("required");
+    }
+  }
+</script>
+
 
 
   <section class="newsletter-section">
