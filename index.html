@@ -530,4 +530,129 @@
             
 </body>
 </html>
-          
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elegant Events - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      overflow-x: hidden;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Loader styles */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loader h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      letter-spacing: 1px;
+      color: #1a1a1a;
+      opacity: 0;
+      text-align: center;
+    }
+
+    /* Main content */
+    .hero-section {
+      min-height: 100vh;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+      text-align: center;
+    }
+
+    .hero-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #111;
+      letter-spacing: 1px;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loader Screen -->
+  <div class="loader">
+    <h1 id="loader-logo">Welcome to Elegant Events</h1>
+  </div>
+
+  <!-- Page Content -->
+  <div class="hero-section">
+    <h2 class="hero-title">Welcome to Elegant Events</h2>
+    <p class="hero-text">
+      Discover the art of celebration with our premium event decorations, curated themes, and unforgettable experiences.
+    </p>
+  </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Animation Script -->
+  <script>
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline();
+
+      tl.to("#loader-logo", {
+        opacity: 1,
+        y: -10,
+        duration: 1.2,
+        ease: "power2.out"
+      })
+      .to(".loader", {
+        y: "-100%",
+        duration: 1.2,
+        ease: "power2.inOut"
+      }, "+=0.5")
+      .from(".hero-title", {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out"
+      }, "-=0.3")
+      .from(".hero-text", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out"
+      }, "-=0.6");
+    });
+  </script>
+
+</body>
+</html>
