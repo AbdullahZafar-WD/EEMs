@@ -1089,7 +1089,7 @@ function addToCart(name, price, image) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   // Check if item already exists
-  const existingItemIndex = cart.findIndex(item => item.name === name);
+  const existingItemIndex = cart.findIndex(item => item.name === name && item.image === image);
   if (existingItemIndex !== -1) {
     cart[existingItemIndex].quantity += 1;
   } else {
