@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Optionally include font awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+     <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
 
     <style>
         * {
@@ -125,6 +128,70 @@
   display: none;
 }
     </style>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      overflow-x: hidden;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Loader styles */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loader h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      letter-spacing: 1px;
+      color: #1a1a1a;
+      opacity: 0;
+      text-align: center;
+    }
+
+    /* Main content */
+    .hero-section {
+      min-height: 100vh;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+      text-align: center;
+    }
+
+    .hero-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #111;
+      letter-spacing: 1px;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
     
     
   </head>
@@ -158,14 +225,47 @@
         <span>Elegant Events</span>
       </div>
       <div class="search-bar">
-        <div class="dropdown-container">
-          <select id="category-select">
-            <option selected>All</option>
-          </select>
-        </div>
-        <input type="text" placeholder="Search your favorite product..." />
-        <button>Search</button>
-      </div>
+  <div class="dropdown-container">
+    <select id="category-select">
+      <option selected>All</option>
+    </select>
+  </div>
+  <input type="text" id="searchInput" placeholder="Search your favorite product..." />
+<button onclick="handleSearch()">Search</button>
+</div>
+
+<script>
+  function handleSearch() {
+    const searchTerm = document.getElementById("searchInput").value.trim();
+    localStorage.setItem("searchTerm", searchTerm);
+    window.location.href = "Shop.html";
+  }
+</script>
+<script>
+  // Function to store the search and redirect
+  function handleSearch() {
+    const searchTerm = document.getElementById("searchInput").value.trim();
+    if (searchTerm) {
+      localStorage.setItem("searchTerm", searchTerm);
+      window.location.href = "Shop.html";
+    }
+  }
+
+  // Handle Enter key on search input
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("searchInput");
+    if (input) {
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          handleSearch();
+        }
+      });
+    }
+  });
+</script>
+
+
       <div class="icons">
         <div class="icon-item">
           <a href="Login.html" style="color: white; text-decoration: none;">
@@ -526,6 +626,55 @@
     }
   }
 </style>
-          
+
+ <!-- Loader Screen -->
+  <div class="loader">
+    <h1 id="loader-logo">Welcome to Elegant Events</h1>
+  </div>
+
+  <!-- Page Content -->
+  <div class="hero-section">
+    <h2 class="hero-title">Welcome to Elegant Events</h2>
+    <p class="hero-text">
+      Discover the art of celebration with our premium event decorations, curated themes, and unforgettable experiences.
+    </p>
+  </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+   <!-- Animation Script -->
+  <script>
+    window.addEventListener("load", () => {
+      const tl = gsap.timeline();
+
+      tl.to("#loader-logo", {
+        opacity: 1,
+        y: -10,
+        duration: 1.2,
+        ease: "power2.out"
+      })
+      .to(".loader", {
+        y: "-100%",
+        duration: 1.2,
+        ease: "power2.inOut"
+      }, "+=0.5")
+      .from(".hero-title", {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out"
+      }, "-=0.3")
+      .from(".hero-text", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out"
+      }, "-=0.6");
+    });
+  </script>
+
 </body>
 </html>
+ 
