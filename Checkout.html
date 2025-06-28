@@ -461,11 +461,11 @@
       let html = '';
       cart.forEach(item => {
         const subtotal = item.price * item.quantity;
-        total += subtotal;
+        total += subtotal + 250;
         html += `
           <div class="summary-item">
-            <span>${item.name} x ${item.quantity}</span>
-            <span>Rs. ${subtotal}</span>
+            <span>${item.name} x ${item.quantity} + ${250}</span>
+            <span>Rs. ${subtotal} + ${250}</span>
           </div>
         `;
       });
